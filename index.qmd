@@ -1,11 +1,40 @@
 ---
-title: "richard-website"
+title: "Richard Xu"
+about:
+  template: trestles
+  image: profile-pic.png
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/richardxu81826/
+    - icon: github
+      text: Github
+      href: https://github.com/richardxu721
+    - icon: envelope-at-fill
+      text: Email
+      url: "mailto:richardxu721@g.ucla.edu"
+    - icon: file-text-fill
+      text: Resume
+      url: "resume_website.pdf"
+toc: false
 ---
 
-This is a Quarto website.
+## About Me
+Richard Xu is a senior at the University of California, Los Angeles, pursuing a double major in Statistics & Data Science and Economics. Outside of academics and organizing club activities, he loves exploring the underwater world through scuba diving and capturing intricate details of nature through macro photography.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+## Education
 
-```{r}
-1 + 5
-```
+**University of California, Los Angeles** | Los Angeles, CA
+
+| Degree                          | Dates                   |
+|---------------------------------|-------------------------|
+| B.S. in Statistics & Data Science | *Sept 2021 - June 2025* |
+| B.A. in Economics               | *Sept 2021 - June 2025* |
+
+<!-- **University of California, Los Angeles** | Los Angeles, CA   -->
+<!-- - B.S. in Statistics & Data Science | Sept 2021 - June 2025   -->
+<!-- - B.A. in Economics | Sept 2021 - June 2025 -->
+
+## Experience
+
+**Nikira Labs** | Sales & Marketing Intern | *July 2023 - Present*

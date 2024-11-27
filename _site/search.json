@@ -2,15 +2,85 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "richard-website",
+    "title": "Richard Xu",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 5\n\n[1] 6"
+    "text": "Richard Xu is a senior at the University of California, Los Angeles, pursuing a double major in Statistics & Data Science and Economics. Outside of academics and organizing club activities, he loves exploring the underwater world through scuba diving and capturing intricate details of nature through macro photography."
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Richard Xu",
+    "section": "Education",
+    "text": "Education\nUniversity of California, Los Angeles | Los Angeles, CA\n\n\n\nDegree\nDates\n\n\n\n\nB.S. in Statistics & Data Science\nSept 2021 - June 2025\n\n\nB.A. in Economics\nSept 2021 - June 2025"
+  },
+  {
+    "objectID": "index.html#experience",
+    "href": "index.html#experience",
+    "title": "Richard Xu",
+    "section": "Experience",
+    "text": "Experience\nNikira Labs | Sales & Marketing Intern | July 2023 - Present"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "richard-website",
+    "title": "",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html#about-me",
+    "href": "index.html#about-me",
+    "title": "Richard Xu",
+    "section": "",
+    "text": "Richard Xu is a senior at the University of California, Los Angeles, pursuing a double major in Statistics & Data Science and Economics. Outside of academics and organizing club activities, he loves exploring the underwater world through scuba diving and capturing intricate details of nature through macro photography."
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "",
+    "section": "",
+    "text": "Title\n\n\n\n\n\n\nProject 1\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html#university-of-california-los-angeles-los-angeles-ca",
+    "href": "index.html#university-of-california-los-angeles-los-angeles-ca",
+    "title": "Richard Xu",
+    "section": "University of California, Los Angeles | Los Angeles, CA",
+    "text": "University of California, Los Angeles | Los Angeles, CA"
+  },
+  {
+    "objectID": "index.html#b.s.-in-statistics-data-science-sept-2021---june-2025",
+    "href": "index.html#b.s.-in-statistics-data-science-sept-2021---june-2025",
+    "title": "Richard Xu",
+    "section": "B.S. in Statistics & Data Science | Sept 2021 - June 2025",
+    "text": "B.S. in Statistics & Data Science | Sept 2021 - June 2025\nB.A. in Economics | Sept 2021 - June 2025"
+  },
+  {
+    "objectID": "projects.html#project-2",
+    "href": "projects.html#project-2",
+    "title": "",
+    "section": "Project 2",
+    "text": "Project 2"
+  },
+  {
+    "objectID": "projects.html#project-1",
+    "href": "projects.html#project-1",
+    "title": "",
+    "section": "",
+    "text": "Here is my project 1"
+  },
+  {
+    "objectID": "projects/01-project.html",
+    "href": "projects/01-project.html",
+    "title": "Project 1",
+    "section": "",
+    "text": "Insert code here\n\nrunif(10)\n\n [1] 0.87027454 0.63586331 0.23892034 0.01903625 0.56569044 0.90225193\n [7] 0.29230673 0.99582683 0.03112595 0.72964471"
+  },
+  {
+    "objectID": "blogs.html",
+    "href": "blogs.html",
+    "title": "",
+    "section": "",
+    "text": "#look at notes from jose’s repo\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\nTitle\n\n\n\n\n\n\n\nNo matching items"
   }
 ]

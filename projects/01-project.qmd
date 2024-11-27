@@ -1,0 +1,10 @@
+---
+title: Project 1
+---
+
+Insert code here
+
+```{r}
+runif(10)
+```
+

@@ -1,20 +1,33 @@
 project:
   type: website
+  resources:
+    - resume_website.pdf
 
 website:
-  title: "richard-website"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - href: about.qmd
-        text: About Me
-
+      - href: projects.qmd
+        text: Projects
+      - href: blogs.qmd
+        text: Blogs
+      
+  page-footer:
+    right: "&copy; 2024, Richard Xu"
+        
 format:
   html:
     theme: cosmo
     css: styles.css
     toc: true
+    # published-title: "last-updated"
+    # reference-location: document
+    # code-fold: false
+    # code-summary: ""
+    # fontsize: 1.3em
 
-
+#only runs files that have changed
+execute: 
+  freeze: auto
 

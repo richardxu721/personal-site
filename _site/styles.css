@@ -1,1 +1,11 @@
 /* css styles */
+.about-links {
+    display: flex;
+    justify-content: center; /* Center-aligns the links */
+    gap: 0px; /* Adds spacing between links */
+}
+
+.about-links a {
+    text-decoration: none; /* Optional: Remove underline */
+    margin: 0; /* Reset margins */
+}

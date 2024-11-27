@@ -1,0 +1,15 @@
+---
+toc: true
+listing:
+  - id: blogs-listing
+    contents:
+      - "/blogs/*.qmd"
+    sort: false
+    sort-ui: false
+    filter-ui: true
+    type: table
+    fields:
+      - title
+    categories: false
+---
+#look at notes from jose's repo
