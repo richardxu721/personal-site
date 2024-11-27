@@ -1,0 +1,4 @@
+- source: project
+  netlify:
+    - id: 24519175-2a71-48cd-9b4a-1a948457ece8
+      url: 'https://richardxu.netlify.app/'
