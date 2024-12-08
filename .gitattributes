@@ -1,0 +1,2 @@
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+_site/projects/media1/TFIDFTeaching.mp4 filter=lfs diff=lfs merge=lfs -text

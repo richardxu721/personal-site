@@ -4,12 +4,11 @@ listing:
   - id: project-listing
     contents:
       - "/projects/*.qmd"
-    sort: false
-    sort-ui: false
+    sort: "date"
+    sort-ui: true
     filter-ui: true
     type: table
-    fields:
-      - title
+    fields: [title, date]
     categories: false
 ---
 

@@ -78,9 +78,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      valueNames: ['listing-title','listing-date',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
       
-      searchColumns: ["listing-title","listing-author"],
+      searchColumns: ["listing-date","listing-title","listing-author"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -151,10 +151,6 @@ window.Quarto = {
     <a class="nav-link active" href="./projects.html" aria-current="page"> 
 <span class="menu-text">Projects</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./blogs.html"> 
-<span class="menu-text">Blogs</span></a>
-  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -184,6 +180,22 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-table" id="listing-project-listing">
 <div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-project-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-project-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Order By</option>
+       <option value="index" data-direction="asc">Default</option>
+         <option value="listing-date-sort" data-direction="asc">
+          Date - Oldest
+        </option>
+         <option value="listing-date-sort" data-direction="desc">
+          Date - Newest
+        </option>
+         <option value="listing-title-sort" data-direction="asc">
+          Title
+        </option>
+     </select>
+  </div>
     <div class="input-group input-group-sm quarto-listing-filter">
       <span class="input-group-text"><i class="bi bi-search"></i></span>
       <input type="text" class="search form-control" placeholder="Filter">
@@ -193,14 +205,20 @@ window.Quarto = {
 <thead>
 <tr>
 <th>
-Title
+<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Title</a>
+</th>
+<th>
+<a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Date</a>
 </th>
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-listing-file-modified-sort="1732753250051" data-listing-reading-time-sort="3" data-listing-word-count-sort="416" data-listing-title-sort="TF-IDF on Trump Tweets" data-listing-filename-sort="01-project.qmd">
+<tr data-index="0" data-listing-date-sort="1733558400000" data-listing-file-modified-sort="1733631784862" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="965" data-listing-title-sort="TF-IDF on Trump Tweets" data-listing-filename-sort="01-project.qmd">
 <td>
 <a href="./projects/01-project.html" class="title listing-title">TF-IDF on Trump Tweets</a>
+</td>
+<td>
+<span class="listing-date">Dec 7, 2024</span>
 </td>
 </tr>
 </tbody>

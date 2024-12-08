@@ -28,13 +28,24 @@ Richard Xu is a senior at the University of California, Los Angeles, pursuing a 
 
 | Degree                          | Dates                   |
 |---------------------------------|-------------------------|
-| B.S. in Statistics & Data Science | *Sept 2021 - June 2025* |
-| B.A. in Economics               | *Sept 2021 - June 2025* |
+| B.S. in Statistics & Data Science | Sept 2021 - June 2025 |
+| B.A. in Economics               | Sept 2021 - June 2025 |
 
 <!-- **University of California, Los Angeles** | Los Angeles, CA   -->
 <!-- - B.S. in Statistics & Data Science | Sept 2021 - June 2025   -->
 <!-- - B.A. in Economics | Sept 2021 - June 2025 -->
 
-## Experience
+## Clubs
+- **Bruin Earth Solutions Aquaponics**  
+  _Project Lead_  
+  September 2024 – Present  
 
-**Nikira Labs** | Sales & Marketing Intern | *July 2023 - Present*
+- **UCLA Club Beach Volleyball**  
+  _Member_  
+  September 2021 – Present
+
+## Job Experience
+
+- **Nikira Labs**   
+  _Sales & Marketing Intern_    
+  July 2023 - Present

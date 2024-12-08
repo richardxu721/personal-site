@@ -1,8 +1,15 @@
 ---
 title: TF-IDF on Trump Tweets
+date: "12-07-2024"
 jupyter: python3
 ---
 
+I made a model to predictively flag Trump's post-2021 tweets based off the flagged or non-flagged statuses of his pre-2021 tweets. While the model did not have the best results, I learned a lot about how to do text-based analysis!
+
+To understand the topic, here's a video I made explaining how TF-IDF works!
+{{< video https://youtu.be/7l7Qknl-ILs >}}
+
+## Importing Modules, Reading Dataset, Indexing Dataset
 ```{python}
 import pandas as pd
 import numpy as np
@@ -10,95 +17,167 @@ import string
 import nltk
 from nltk.corpus import stopwords
 #nltk.download('stopwords')
-pre_2021 = pd.read_csv('tweets_01-08-2021.csv')
+pre_2021 = pd.read_csv('media1/tweets_01-08-2021.csv')
 #print(pre_2021.text)
+
+#two dataframes
+index = pre_2021['isFlagged'] == 't'
+flagged_pre_2021 = pre_2021[index]
+n_flagged_pre_2021 = pre_2021[~index]
 ```
 
+## Running TF-IDF on the Flagged Data
 ```{python}
-def word_counter(column):
-    dict = {}
-    stop_words = set(stopwords.words('english'))
-    additional_stopwords = {'t.co', 'https', 'http', 'rt', 'amp', 'www', 'co', 'com'}
-    stop_words.update(additional_stopwords)
-    for tweets in column:
-        tweets = tweets.translate(str.maketrans('', '', string.punctuation))
-        separated_words = tweets.split()
-        for item in separated_words:
-            word = item.strip().lower()
-            #word = word.translate(str.maketrans('', '', string.punctuation))
-            if word and word not in stop_words:
-                if word not in dict:
-                    dict[word] = 1
-                else:
-                    dict[word] += 1
-    return dict
-```
+#tfidf isFlagged
+from sklearn.feature_extraction.text import TfidfVectorizer #scikitlearn library, feature_extraction module, TfidfVectorizer Class 
 
-```{python}
-from sklearn.feature_extraction.text import TfidfVectorizer
+custom_stop_words = ["t.co", "https", "http", "rt", "amp", "www", "co", "com"]
+default_stop_words = TfidfVectorizer(stop_words='english').get_stop_words()
+combined_stop_words = list(default_stop_words.union(custom_stop_words))
 
-stop_words = set(stopwords.words('english'))
-additional_stopwords = {'t.co', 'https', 'http', 'rt', 'amp', 'www', 'co', 'com'}
-stop_words.update(additional_stopwords)
-stop_words_list = list(stop_words)
+# Combine custom stop words with the default English stop words
+tfidf = TfidfVectorizer(
+    stop_words=combined_stop_words, 
+    max_features=3000,
+    ngram_range = (1,3)
+)
 
-#many different arguments to check out
-#tfidf = TfidfVectorizer(stop_words=stop_words_list, max_features=20, max_df=0.9, min_df = 0.1)
-tfidf = TfidfVectorizer(stop_words=stop_words_list, max_features = 20)
+#Fit the TfidfVectorizer to the data
+result = tfidf.fit_transform(flagged_pre_2021.text)
+keys = list(tfidf.vocabulary_.keys())
+#print(keys)
 
-result = tfidf.fit_transform(pre_2021.text)
-
-# get indexing
+# # get indexing for first 30 values
 print('\nWord indexes:')
-print(tfidf.vocabulary_)
+first_few = list(tfidf.vocabulary_.items())[:30]
+for key, value in first_few:
+    print(f"{key}: {value}")
+#print(tfidf.vocabulary_)
  
-# display tf-idf values
+# # display tf-idf values
 print('\ntf-idf value:')
 print(result)
+
+#check tfidf matrix dimensions
+#number of documents by number of features
+print(result.toarray().shape)
 ```
+When looking at the coordinate, the left coordinate is the document, or in our case tweet, that the word/phrase is in. The right coordinate is a word/phrase which corresponds to the tfidf vocabulary_ dictionary. Finally the values column gives us the TF-IDF scores/values: the higher it is, the more important it is!
 
+## Running TF-IDF on the Non-Flagged Data
 ```{python}
-# Convert the sparse matrix to a dense format
-dense_matrix = result.toarray()
+#tfidf is not Flagged
+#we add these custom ones to remove links that Trump posts
+custom_stop_words = ["t.co", "https", "http", "rt", "amp", "www", "co", "com"]
+default_stop_words = TfidfVectorizer(stop_words='english').get_stop_words()
+combined_stop_words = list(default_stop_words.union(custom_stop_words))
 
-# List to store all (index, score) pairs across all documents
-all_scores = []
+# Combine custom stop words with the default English stop words
+tfidf2 = TfidfVectorizer(
+    stop_words=combined_stop_words,  
+    max_features=3000, #3000 features to look for
+    ngram_range = (1,3) #each feature can be 1 to 3 words long (to capture nuance)
+)
 
-# Iterate over each document and each word's TF-IDF score
-for doc_idx, doc_tfidf in enumerate(dense_matrix):
-    for word_idx, score in enumerate(doc_tfidf):
-        if score > 0:  # Only consider non-zero TF-IDF scores
-            all_scores.append((word_idx, score))
+# Fit the TfidfVectorizer to the data
+result2 = tfidf2.fit_transform(n_flagged_pre_2021.text)
 
-# Sort all scores in descending order
-all_scores_sorted = sorted(all_scores, key=lambda x: x[1], reverse=True)
+#the key features
+keys2 = list(tfidf2.vocabulary_.keys())
+#print(keys2)
 
-# Get the top N highest TF-IDF scores (let's say top 5)
-top_n = 5
-top_scores = all_scores_sorted[:top_n]
-
-# Print the top N TF-IDF scores with corresponding words
-for idx, score in top_scores:
-    word = list(tfidf.vocabulary_.keys())[list(tfidf.vocabulary_.values()).index(idx)]  # Get word from index
-    print(f"Word: '{word}', TF-IDF score: {score}")
-```
-
-```{python}
-flagged = pre_2021[pre_2021["isFlagged"] != "f"]
-
-#tfidf 
-#flagged_tfidf = TfidfVectorizer(stop_words='english', max_features=30)
-flagged_tfidf = TfidfVectorizer(stop_words=stop_words_list, max_features=30, ngram_range = (1,3))
-flagged_result = flagged_tfidf.fit_transform(flagged.text)
-
-# get indexing
-print('\nWord indexes:')
-print(flagged_tfidf.vocabulary_.keys())
-print("\n")
-print(flagged_tfidf.vocabulary_)
+# # get indexing
+# print('\nWord indexes:')
+# print(tfidf.vocabulary_)
  
-# display tf-idf values
-print('\ntf-idf value:')
-print(flagged_result)
+# # display tf-idf values
+# print('\ntf-idf value:')
+# print(result)
 ```
 
+## Taking the difference between the two word sets
+```{python}
+#difference between vocab sets
+keys_set = set(keys)
+keys2_set = set(keys2)
+difference_keys = keys_set.difference(keys2_set)
+#print(difference_keys)
+```
+
+## Quick visualization of word overlap
+```{python}
+from matplotlib_venn import venn2
+import matplotlib.pyplot as plt
+
+# Create sets from your word lists
+flagged_set = keys_set  # Words in the flagged tweets
+non_flagged_set = keys2_set  # Words in non-flagged tweets
+
+# Create a Venn diagram
+venn = venn2([flagged_set, non_flagged_set], set_labels=('Flagged Set', 'Non-Flagged Set'))
+venn.get_patch_by_id('10').set_color('lightgreen')  # Color for flagged set
+venn.get_patch_by_id('01').set_color('lightgray')  # Color for non-flagged set
+venn.get_patch_by_id('11').set_color('red')  # Color for intersection
+
+plt.show()
+```
+The values we will use to predict if a tweet is flagged are the ones in green.
+
+I take the dictionary "difference" that I just found which is the words in the isFlagged tweets but not the non-flagged ones and then place that set into a function "tweet_flagger". This essentially searches through all the post-2021 tweets and changes their flag_prediction value to True if it detects any of the words in the dictionary.
+```{python}
+import string
+
+def tweet_flagger(df):
+    flagged_words = difference_keys
+    for index, row in df.iterrows():
+        tweet = row['text']  # Replace 'tweet' with the actual column name that holds the tweet text
+        tweet = tweet.translate(str.maketrans('', '', string.punctuation))  # Remove punctuation
+        separated_words = tweet.split()  # Split the tweet into words
+
+        # Check if any word in the tweet is in the flagged dictionary
+        if any(word.lower() in flagged_words for word in separated_words):
+            df.at[index, 'flag_prediction'] = 't'  # Update flag_prediction to 't'
+    return df[['text', 'flag_prediction']]    
+```
+
+## Running the function on the pre-2021 data / training data to check accuracy
+```{python}
+#set default as false
+pre_2021["flag_prediction"] = "f"
+#predicting flag status
+old_post = tweet_flagger(pre_2021)
+
+#confusion matrix
+frequency_table = pd.crosstab(pre_2021['isFlagged'], old_post['flag_prediction'])
+print(frequency_table)
+```
+- The model has high accuracy (95.48%), but this might be misleading because the dataset appears imbalanced (many more f cases than t cases).
+- The precision (6.63%) is low, meaning a large proportion of the flagged predictions are incorrect.
+- The recall (60.53%) is moderate, meaning the model identifies 60.53% of the actual flagged cases. 
+-The F1-Score (11.91%) is low, indicating a poor balance between precision and recall.
+
+These are not the greatest statistics but are comparable to the xgboost, logistic, and randomforest models I made previously for the same dataset. Likely due to the 304 vs ~24000 flagged to nonflagged inbalance in the dataset. I did indeed attempt SMOTE, oversampling, and undersampling to no avail.
+
+## Running it on the new post-2021 data!
+```{python}
+#time to test on post 2021
+post_2021 = pd.read_csv('media1/trump_post_2021.csv')
+#set default as false
+post_2021["flag_prediction"] = "f"
+
+#predicting
+new_post = tweet_flagger(post_2021)
+
+#confusion matrix
+frequency_table = post_2021['flag_prediction'].value_counts()
+print(frequency_table)
+```
+The function classified 2206 of the post-2021 tweets as flagged and 17305 of them as nonflagged!
+
+Looking at some of the tweets the function predicted as flagged we see:
+
+**A giant Fake News Scam by CBS & 60 Minutes. Her REAL ANSWER WAS CRAZY, OR DUMB, so they actually REPLACED it with another answer in order to save her or, at least, make her look better. A FAKE NEWS SCAM, which is totally illegal. TAKE AWAY THE CBS LICENSE. Election Interference. She is a Moron, and the Fake News Media wants to hide that fact. An UNPRECEDENTED SCANDAL!!! The Dems got them to do this and should be forced to concede the Election? WOW!**
+
+Overall, very fun interesting project! Though I did do sentiment analysis on the side, I failed to implement it so that will be something to try for next time. 
+
+Also once again note that I attempted logistic, xgboost, and randomforest models that had similar results to this one in terms of predictive capability. If I had more time I would work more with the data to make it more balanced before modeling.
