@@ -1,0 +1,14 @@
+---
+toc: true
+listing:
+  - id: hobbies-listing
+    contents:
+      - "/hobbies/*.qmd"
+    sort: false
+    sort-ui: false
+    filter-ui: true
+    type: grid
+    # fields:
+    #   - title
+    categories: false
+---

@@ -13,10 +13,10 @@ website:
         text: Home
       - href: projects.qmd
         text: Projects
+      - href: hobbies.qmd
+        text: Hobbies  
       # - href: blogs.qmd
-      #   text: Blogs
-      # - href: blogs.qmd
-      #   text: Hobbies
+      # text: Blogs
       
   page-footer:
     right: "&copy; 2024, Richard Xu"
