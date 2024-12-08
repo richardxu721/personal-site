@@ -3,6 +3,9 @@ project:
   resources:
     - resume_website.pdf
 
+media:
+  youtube: true
+
 website:
   navbar:
     left:
