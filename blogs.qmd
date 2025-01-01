@@ -8,8 +8,8 @@ listing:
     sort-ui: false
     filter-ui: true
     type: table
-    fields:
-      - title
+    #fields:
+    #  - title
     categories: false
 ---
 #look at notes from jose's repo
