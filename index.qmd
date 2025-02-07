@@ -15,7 +15,7 @@ about:
       url: "mailto:richardxu721@g.ucla.edu"
     - icon: file-text-fill
       text: Resume
-      url: "feb_resume.pdf"
+      url: "2.6resume.pdf"
 toc: false
 ---
 
