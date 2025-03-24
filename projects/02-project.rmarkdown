@@ -3,11 +3,15 @@ title: Geospatial Predictions on Best Snow Crab Harvesting Grounds
 date: "03-18-2025"
 ---
 
+
+
 I used geo-statistical packages **geoR** and **gstat** to predict where Alaskan Snow Crab would be most dense based of the data spatial data gathered from the year 2010. 
 
 I used the **Snow Crab Geospatial Data (1975-2018)** dataset posted by Matt Op on [kaggle](https://www.kaggle.com/datasets/mattop/snowcrab). This has already been data cleaned.
 
 # Importing Necessary Libraries and Dataset
+
+
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 options(progress = FALSE)
@@ -30,6 +34,8 @@ library(gridExtra)
 data <- read_csv("media2/mfsnowcrab.csv")
 ```
 
+
+
 # Description of Dataset:
 The description of the dataset variables is as follows: 
 - Latitude: The latitude (decimal degrees) at the start of the haul. 
@@ -47,6 +53,8 @@ The description of the dataset variables is as follows:
 We will use CPUE as a response variable / attribute.
 
 # Basic EDA
+
+
 ```{r}
 #dimensions
 dim(data)
@@ -54,10 +62,14 @@ dim(data)
 #summary
 summary(data)
 ```
+
+
 There are 17927 observations with 11 columns. The variables all look to be in the same class.
 
 ## Filtering the dataset to just 2010
 We want to use only the 2010 data since it has the most observations. We also need to make sure the observation do not have duplicate haul numbers as the geospatial prediction method of kriging we use later does not allow for data that stems from the same location / observation.
+
+
 ```{r, results = 'hide'}
 #checking observation counts per year with no duplicate hauls
 data %>%
@@ -82,9 +94,13 @@ unique(duplicates)  # Shows unique haul numbers that are duplicated
 #check for nas
 colSums(is.na(data_2010))
 ```
+
+
 There are no NA's. There are also no duplicates.
 
 ## Looking at data_2010:
+
+
 ```{r}
 #dimensions
 dim(data_2010)
@@ -92,11 +108,15 @@ dim(data_2010)
 #summary
 summary(data_2010)
 ```
+
+
 210 observations. Nice!
 
 # Histograms, ECDF, Scatterplot, Correlation Matrix
 
 ## Correlation Matrix
+
+
 ```{r}
 #correlation matrix
 cor_matrix <- cor(scale(data_2010[sapply(data_2010, is.numeric)]))
@@ -113,9 +133,13 @@ cor_cpue <- cor_matrix["cpue", ]
 #which are the largest one
 sort(abs(cor_cpue), decreasing = TRUE)
 ```
+
+
 I want to use bottom_temperature, bottom_depth, surface_temperature as predictors for the method of co-kriging later as this method requires strongly correlated variables.
 
 ## Histograms
+
+
 ```{r}
 par(mfrow = c(2,2))
 #histograms
@@ -135,18 +159,26 @@ hist(data_2010$surface_temperature,
      main = "Histogram of Surface Temperature", 
      xlab = "Surface Temperature")
 ```
+
+
 Looks pretty normal except for the CPUE, this one is skewed right. Let's test normality for all though.
 
 ## Tests for Normality
+
+
 ```{r}
 shapiro.test(data_2010$cpue)
 shapiro.test(data_2010$bottom_temperature)
 shapiro.test(data_2010$bottom_depth)
 shapiro.test(data_2010$surface_temperature)
 ```
+
+
 Since the p-value is less than 0.05 for all of them, none of them are normal. I should probably log transform the variables later when doing analysis.
 
 ## h-scatterplot
+
+
 ```{r}
 #hscatterplot
 # Produces h-scatterplots, where point pairs having specific separation distances are plotted
@@ -160,21 +192,29 @@ dist_max <- max(dist_mat)
 qq <- hscat(cpue~1, data_2010, seq(0, 20, by = 2))
 plot(qq, main="h-scatterplots")
 ```
+
+
 This is a lagged scatterplot matrix that shows the relationship between "cpue" (catch per unit effort) at different distance lags. Each panel represents a scatterplot of cpue values at different lag intervals, and the correlation coefficient is shown for each panel. Since the first panel has the strongest correlation of 0.238 we can conclude that cpue values at nearby locations tend to be somewhat similar and as distance increases this correlation decreases.
 
 ## Bubble Plot
+
+
 ```{r}
 #bubble plot
 response <- as.data.frame(cbind(coordinates(data_2010), data_2010$cpue))
 bubble <- as.geodata(response)
 points(bubble)
 ```
+
+
 This bubble plot shows the locations of all the observations and their outcome variable magnitudes. The bigger the circle the bigger the cpue variable.
 
 # Generating an Emperical Semivariogram for Kriging.
 Here we generate an emperical semivariogram. A semivariogram is a tool used in geostatistics to measure how similar (or different) data points are based on the distance between them. It helps us understand spatial patterns in data, such as whether nearby locations have similar values or if there is a predictable structure across space. The x-axis is the distance lag between points. The y-axis is semivariance which is how different the points tend to be. This is calculated by taking the difference in values and squaring them.
 
 We need this because prediction using kriging relies on the idea that nearby locations have similar values, and the semivariogram quantifies this relationship by showing how variance (difference) increases with distance. Later using this model we make, kriging will assign weights to data points based on their distances and this semivariogram model.
+
+
 
 ```{r}
 #log transform since skewed
@@ -256,10 +296,14 @@ c(press_gau2, press_exp2, press_sph2)
 p10
 ```
 
+
+
 First, I plot the sample variogram given the dataset. We first make a gstat object that log transforms the cpue variable. We then plot the variogram, which can be further adjusted using classical or robust estimators to improve the next step of model fit. We then need to fit a variogram model to this plot so that we can make predictions in kriging later. I use two types of sample variograms and three type of variogram models here and cross-validate to find that the spherical variogram function fit on the sample variogram using robust estimators minimizes the prediction squared error. Notice that we have a 3D scatterplot of the data. This is used to identify spatial trends in the data to see if data detrending is required to meet the requirements of ordinary kriging which is a constant mean. Luckily there is no trend.
 
 # Inverse Distance Interpolation Predictions
 We first try Inverse Distance Interpolation Prediction.
+
+
 ```{r, results='hide'}
 #making grid
 x_val <- seq(min(coordinates(data_2010)[,1]), max(coordinates(data_2010)[,1]), 
@@ -317,6 +361,8 @@ points(data_2010, cex=log(data_2010$cpue) / mean(log(data_2010$cpue)), pch=19)
 contour(x_val, y_val, qqq, add=TRUE, col="black", labcex=1)
 title(main="Log_cpue IDW Predictions", sub = "Contour lines")
 ```
+
+
 Inverse Distance Interpolation predicting is a method used to estimate values at unknown locations based on nearby known values. It assumes that closer points have more influence on the predicted value than farther points.
 
 The mask function is implemented to remove all areas on the raster map outside of the sample domain as all spatial prediction is interpolation, as in you can only make predictions within the given domain of points. 
@@ -328,6 +374,8 @@ We use different types of kriging below:
 - Ordinary Kriging: assumes a constant but unknown mean
 - Universal Kriging: assumes a non-constant and unknown mean, or trended data
 - Co-Kriging: uses correlated variables to help contribute to main variable predictions
+
+
 ```{r}
 #we will just use ordinary, universal, and cokriging
 #ordinary kriging
@@ -358,9 +406,13 @@ p11 <- plot(var_co, main = "Emperical Semivariogram Co-Krig")
 vm_fit <- fit.lmc(var_co, g1, model=s.fit2)
 plot(var_co, vm_fit)
 ```
+
+
 I ended up having to use just the log transformed bottom temperature and bottom depth variables for co-kriging as the cross validation function was unable to converge when using all three. We cross validate co-kriging, ordinary kriging, and universal kriging below.
 
 ## Cross Validation
+
+
 ```{r, results='hide'}
 #ordinary kriging
 cv_ok <- krige.cv(log(cpue)~1, data_2010, model=s.fit2, 
@@ -380,9 +432,13 @@ press_ck <- sum(cv_ck$residual^2) / nrow(data_2010)
 ```{r}
 c(press_ok, press_uk, press_ck)
 ```
+
+
 Co-kriging is the best at minimizing prediction squared error out of the three we tested so we will make predictions using it.
 
 ## Predictions for Co-Kriging
+
+
 ```{r, results='hide'}
 #Cokriging predictions:
 ck <- predict(vm_fit, grid, verbose = FALSE)
@@ -390,9 +446,13 @@ ck <- predict(vm_fit, grid, verbose = FALSE)
 #collapse
 pred_mat <- matrix(ck$log_cpue.pred, length(x_val), length(y_val))
 ```
+
+
 We leave the predictions in matrix form then plot it.
 
 # Raster Map from Co-Kriging
+
+
 ```{r}
 #use interpolating insurer from earlier
 d2 <- mask(pred_mat, data_2010, x_val, y_val, 5)
@@ -405,4 +465,6 @@ points(data_2010, cex=log(data_2010$cpue) / mean(log(data_2010$cpue)), pch=19)
 contour(x_val, y_val, pred_mat, add=TRUE, col="black", labcex=1)
 title(main="Log_cpue Co-Krig Predictions", sub = "Contour lines")
 ```
+
+
 Similarly, we mask points that are outside the domain of the dataset. This raster map shows the locations where Alaskan Snow Crab concentrations would theoretically be highest!
