@@ -39,7 +39,7 @@
     "href": "projects.html",
     "title": "",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\nTF-IDF on Trump Tweets\n\n\nDec 7, 2024\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\nTF-IDF on Trump Tweets\n\n\nDec 7, 2024\n\n\n\n\nGeospatial Predictions on Best Snow Crab Harvesting Grounds\n\n\nMar 18, 2025\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html#university-of-california-los-angeles-los-angeles-ca",
@@ -159,5 +159,75 @@
     "title": "",
     "section": "",
     "text": "Tidepooling Finds Interactive Map\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "projects/02-project.html",
+    "href": "projects/02-project.html",
+    "title": "Geospatial Predictions on Best Snow Crab Harvesting Grounds",
+    "section": "",
+    "text": "I used geo-statistical packages and to predict where Alaskan Snow Crab would be most dense based of the data spatial data gathered from the year 2010.\nI used the \\textbf{Snow Crab Geospatial Data (1975-2018)| dataset posted by Matt Op on kaggle. This has already been data cleaned. The link is as follows: https://www.kaggle.com/datasets/mattop/snowcrab."
+  },
+  {
+    "objectID": "projects/02-project.html#filtering-the-dataset-to-just-2010",
+    "href": "projects/02-project.html#filtering-the-dataset-to-just-2010",
+    "title": "Geospatial Predictions on Best Snow Crab Harvesting Grounds",
+    "section": "Filtering the dataset to just 2010",
+    "text": "Filtering the dataset to just 2010\nWe want to use only the 2010 data since it has the most observations. We also need to make sure the observation do not have duplicate haul numbers as the geospatial prediction method of kriging we use later does not allow for data that stems from the same location / observation.\n\n#checking observation counts per year with no duplicate hauls\ndata %&gt;%\n  distinct(haul, .keep_all = TRUE) %&gt;%  \n  group_by(year) %&gt;%                   \n  summarise(count = n()) %&gt;%            \n  arrange(desc(count))            \n\n#filtering the data to only 2010 with unique data points only\ndata_2010 &lt;- data %&gt;%\n  filter(year == 2010) %&gt;%  # Keep only 2010 data\n  group_by(haul) %&gt;%  \n  mutate(count = n()) %&gt;%    # Count occurrences of each haul\n  filter(count == 1 | row_number() == 1) %&gt;%  # Keep unique hauls + first instance of duplicates\n  ungroup() %&gt;%\n  select(-count)  # Remove count column\n\n#check for duplicates\nduplicates &lt;- data_2010$haul[duplicated(data_2010$haul)]\nunique(duplicates)  # Shows unique haul numbers that are duplicated\n\n#check for nas\ncolSums(is.na(data_2010))\n\nThere are no NA’s. There are also no duplicates."
+  },
+  {
+    "objectID": "projects/02-project.html#looking-at-data_2010",
+    "href": "projects/02-project.html#looking-at-data_2010",
+    "title": "Geospatial Predictions on Best Snow Crab Harvesting Grounds",
+    "section": "Looking at data_2010:",
+    "text": "Looking at data_2010:\n\n#dimensions\ndim(data_2010)\n\n[1] 210  11\n\n#summary\nsummary(data_2010)\n\n       id            latitude       longitude           year     \n Min.   :159664   Min.   :54.99   Min.   :-178.2   Min.   :2010  \n 1st Qu.:161313   1st Qu.:57.33   1st Qu.:-173.8   1st Qu.:2010  \n Median :162314   Median :58.68   Median :-171.2   Median :2010  \n Mean   :162649   Mean   :58.66   Mean   :-170.8   Mean   :2010  \n 3rd Qu.:163791   3rd Qu.:60.01   3rd Qu.:-168.0   3rd Qu.:2010  \n Max.   :166371   Max.   :62.00   Max.   :-161.6   Max.   :2010  \n     name               sex             bottom_depth    surface_temperature\n Length:210         Length:210         Min.   : 40.00   Min.   :1.00       \n Class :character   Class :character   1st Qu.: 68.00   1st Qu.:5.00       \n Mode  :character   Mode  :character   Median : 83.00   Median :6.55       \n                                       Mean   : 89.62   Mean   :6.32       \n                                       3rd Qu.:108.75   3rd Qu.:8.40       \n                                       Max.   :192.00   Max.   :9.70       \n bottom_temperature      haul             cpue          \n Min.   :-1.6000    Min.   : 16.00   Min.   :     52.0  \n 1st Qu.:-1.0000    1st Qu.: 86.25   1st Qu.:    677.2  \n Median : 0.6000    Median :139.50   Median :   5316.5  \n Mean   : 0.7481    Mean   :137.79   Mean   :  51539.8  \n 3rd Qu.: 2.1000    3rd Qu.:192.50   3rd Qu.:  28748.8  \n Max.   : 5.1000    Max.   :245.00   Max.   :1070004.0  \n\n\n210 observations. Nice!"
+  },
+  {
+    "objectID": "projects/02-project.html#correlation-matrix",
+    "href": "projects/02-project.html#correlation-matrix",
+    "title": "Geospatial Predictions on Best Snow Crab Harvesting Grounds",
+    "section": "Correlation Matrix",
+    "text": "Correlation Matrix\n\n#correlation matrix\ncor_matrix &lt;- cor(scale(data_2010[sapply(data_2010, is.numeric)]))\nhigh_corr_indices &lt;- which(abs(cor_matrix) &gt; 0.7, arr.ind = TRUE)\n# Extract the names of the variables involved in the high correlations\nhigh_corr_pairs &lt;- data.frame(\n  var1 = rownames(cor_matrix)[high_corr_indices[, 1]],\n  var2 = colnames(cor_matrix)[high_corr_indices[, 2]],\n  correlation = cor_matrix[high_corr_indices]\n)\n\n#response correlations\ncor_cpue &lt;- cor_matrix[\"cpue\", ]\n#which are the largest one\nsort(abs(cor_cpue), decreasing = TRUE)\n\n               cpue            latitude                haul surface_temperature \n         1.00000000          0.48166915          0.42204061          0.36076845 \n          longitude                  id  bottom_temperature        bottom_depth \n         0.32925130          0.27546297          0.21331928          0.02460697 \n\n\nI want to use bottom_temperature, bottom_depth, surface_temperature as predictors for the method of co-kriging later as this method requires strongly correlated variables."
+  },
+  {
+    "objectID": "projects/02-project.html#histograms",
+    "href": "projects/02-project.html#histograms",
+    "title": "Geospatial Predictions on Best Snow Crab Harvesting Grounds",
+    "section": "Histograms",
+    "text": "Histograms\n\npar(mfrow = c(2,2))\n#histograms\nhist(data_2010$cpue, \n     main = \"Histogram of Catch Number per Area\", \n     xlab = \"CPUE\")\n\nhist(data_2010$bottom_temperature, \n     main = \"Histogram of Bottom Temperature\", \n     xlab = \"bottom_temperature\")\n\nhist(data_2010$bottom_depth, \n     main = \"Histogram of Bottom Depth (m)\", \n     xlab = \"Bottom Depth (m)\")\n\nhist(data_2010$surface_temperature, \n     main = \"Histogram of Surface Temperature\", \n     xlab = \"Surface Temperature\")\n\n\n\n\n\n\n\n\nLooks pretty normal except for the CPUE, this one is skewed right. Let’s test normality for all though."
+  },
+  {
+    "objectID": "projects/02-project.html#tests-for-normality",
+    "href": "projects/02-project.html#tests-for-normality",
+    "title": "Geospatial Predictions on Best Snow Crab Harvesting Grounds",
+    "section": "Tests for Normality",
+    "text": "Tests for Normality\n\nshapiro.test(data_2010$cpue)\n\n\n    Shapiro-Wilk normality test\n\ndata:  data_2010$cpue\nW = 0.43008, p-value &lt; 2.2e-16\n\nshapiro.test(data_2010$bottom_temperature)\n\n\n    Shapiro-Wilk normality test\n\ndata:  data_2010$bottom_temperature\nW = 0.92708, p-value = 1.051e-08\n\nshapiro.test(data_2010$bottom_depth)\n\n\n    Shapiro-Wilk normality test\n\ndata:  data_2010$bottom_depth\nW = 0.95349, p-value = 2.487e-06\n\nshapiro.test(data_2010$surface_temperature)\n\n\n    Shapiro-Wilk normality test\n\ndata:  data_2010$surface_temperature\nW = 0.94799, p-value = 7.044e-07\n\n\nSince the p-value is less than 0.05 for all of them, none of them are normal. I should probably log transform the variables later when doing analysis."
+  },
+  {
+    "objectID": "projects/02-project.html#h-scatterplot",
+    "href": "projects/02-project.html#h-scatterplot",
+    "title": "Geospatial Predictions on Best Snow Crab Harvesting Grounds",
+    "section": "h-scatterplot",
+    "text": "h-scatterplot\n\n#hscatterplot\n# Produces h-scatterplots, where point pairs having specific separation distances are plotted\n# first argument is the formula / variable used\n# second is the data set\n# third is the breaks in the data we are detecting in this case 0 to 1 by 0.1\ncoordinates(data_2010) &lt;- ~longitude+latitude\ndist_mat &lt;- dist(coordinates(data_2010))\n#max distance\ndist_max &lt;- max(dist_mat)\nqq &lt;- hscat(cpue~1, data_2010, seq(0, 20, by = 2))\nplot(qq, main=\"h-scatterplots\")\n\n\n\n\n\n\n\n\nThis is a lagged scatterplot matrix that shows the relationship between “cpue” (catch per unit effort) at different distance lags. Each panel represents a scatterplot of cpue values at different lag intervals, and the correlation coefficient is shown for each panel. Since the first panel has the strongest correlation of 0.238 we can conclude that cpue values at nearby locations tend to be somewhat similar and as distance increases this correlation decreases."
+  },
+  {
+    "objectID": "projects/02-project.html#bubble-plot",
+    "href": "projects/02-project.html#bubble-plot",
+    "title": "Geospatial Predictions on Best Snow Crab Harvesting Grounds",
+    "section": "Bubble Plot",
+    "text": "Bubble Plot\n\n#bubble plot\nresponse &lt;- as.data.frame(cbind(coordinates(data_2010), data_2010$cpue))\nbubble &lt;- as.geodata(response)\npoints(bubble)\n\n\n\n\n\n\n\n\nThis bubble plot shows the locations of all the observations and their outcome variable magnitudes. The bigger the circle the bigger the cpue variable."
+  },
+  {
+    "objectID": "projects/02-project.html#cross-validation",
+    "href": "projects/02-project.html#cross-validation",
+    "title": "Geospatial Predictions on Best Snow Crab Harvesting Grounds",
+    "section": "Cross Validation",
+    "text": "Cross Validation\n\n#ordinary kriging\ncv_ok &lt;- krige.cv(log(cpue)~1, data_2010, model=s.fit2, \n                  nfold=nrow(data_2010)) \npress_ok &lt;- sum(cv_ok$residual^2) / nrow(data_2010)\n\n#universal cv\ncv_uk &lt;- krige.cv(log(cpue)~longitude+latitude, data_2010, model=s.fit2, \n                  nfold=nrow(data_2010)) \npress_uk &lt;- sum(cv_ok$residual^2) / nrow(data_2010)\n\n#cokriging cv\ncv_ck &lt;- gstat.cv(vm_fit, verbose = FALSE)\npress_ck &lt;- sum(cv_ck$residual^2) / nrow(data_2010)\n\n\nc(press_ok, press_uk, press_ck)\n\n[1] 1.417918 1.417918 1.282675\n\n\nCo-kriging is the best at minimizing prediction squared error out of the three we tested so we will make predictions using it."
+  },
+  {
+    "objectID": "projects/02-project.html#predictions-for-co-kriging",
+    "href": "projects/02-project.html#predictions-for-co-kriging",
+    "title": "Geospatial Predictions on Best Snow Crab Harvesting Grounds",
+    "section": "Predictions for Co-Kriging",
+    "text": "Predictions for Co-Kriging\n\n#Cokriging predictions:\nck &lt;- predict(vm_fit, grid, verbose = FALSE)\n\n#collapse\npred_mat &lt;- matrix(ck$log_cpue.pred, length(x_val), length(y_val))\n\nWe leave the predictions in matrix form then plot it."
   }
 ]
