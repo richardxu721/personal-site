@@ -31,19 +31,20 @@ data <- read_csv("media2/mfsnowcrab.csv")
 ```
 
 # Description of Dataset:
-The description of the dataset variables is as follows: 
-- **Latitude**: The latitude (decimal degrees) at the start of the haul. 
-- **Longitude**: The longitude (decimal degrees) at the start of the haul. 
-- **Year**: Year specimen was collected. 
-- **Name**: The common name of the marine organism associated with the scientific name. 
-- **Sex**: Gender of crab. 
-- **Bottom Depth**: Meters (m). Weighted average depth (m) and is calculated by adding gear depth to net height. 
-- **Surface Temperature**: Surface temperature, in tenths of a degree, Celsius. 
-- **Bottom Temperature**: Average temperature (in tenths of a degree Celsius) measured at the maximum depth of the trawl. 
-- **Haul**: This number uniquely identifies a haul within a cruise. It is a sequential number, in chronological order of occurrence. 
-- **CPUE**: Catch number per area the net swept in number/square nautical mile.
+The description of the dataset variables is as follows:
 
-We will use CPUE as a response variable / attribute to predict.
+- **Latitude**: The latitude (decimal degrees) at the start of the haul.  
+- **Longitude**: The longitude (decimal degrees) at the start of the haul.  
+- **Year**: Year specimen was collected.  
+- **Name**: The common name of the marine organism associated with the scientific name.  
+- **Sex**: Gender of crab.  
+- **Bottom Depth**: Meters (m). Weighted average depth (m) and is calculated by adding gear depth to net height.  
+- **Surface Temperature**: Surface temperature, in tenths of a degree, Celsius.  
+- **Bottom Temperature**: Average temperature (in tenths of a degree Celsius) measured at the maximum depth of the trawl.  
+- **Haul**: This number uniquely identifies a haul within a cruise. It is a sequential number, in chronological order of occurrence.  
+- **CPUE**: Catch number per area the net swept in number/square nautical mile.  
+
+We will use CPUE as the attribute to predict.
 
 # Basic EDA
 ```{r}

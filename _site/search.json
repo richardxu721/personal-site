@@ -1,73 +1,10 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Richard Xu",
-    "section": "",
-    "text": "Richard Xu is a senior at the University of California, Los Angeles, pursuing a double major in Statistics & Data Science and Economics. Outside of academics and organizing club activities, he loves exploring the underwater world through scuba diving and capturing intricate details of nature through macro photography."
-  },
-  {
-    "objectID": "index.html#education",
-    "href": "index.html#education",
-    "title": "Richard Xu",
-    "section": "Education",
-    "text": "Education\nUniversity of California, Los Angeles | Los Angeles, CA\n\n\n\nDegree\nDates\n\n\n\n\nB.S. in Statistics & Data Science\nSept 2021 - June 2025\n\n\nB.A. in Economics\nSept 2021 - June 2025"
-  },
-  {
-    "objectID": "index.html#experience",
-    "href": "index.html#experience",
-    "title": "Richard Xu",
-    "section": "Experience",
-    "text": "Experience\nNikira Labs | Sales & Marketing Intern | July 2023 - Present"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "index.html#about-me",
-    "href": "index.html#about-me",
-    "title": "Richard Xu",
-    "section": "",
-    "text": "Richard Xu is a senior at the University of California, Los Angeles, pursuing a double major in Statistics & Data Science and Economics. Outside of academics and organizing club activities, he loves exploring the underwater world through scuba diving and capturing intricate details of nature through macro photography."
-  },
-  {
     "objectID": "projects.html",
     "href": "projects.html",
     "title": "",
     "section": "",
     "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\nTF-IDF on Trump Tweets\n\n\nDec 7, 2024\n\n\n\n\nGeospatial Predictions on Best Snow Crab Harvesting Grounds\n\n\nMar 18, 2025\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "index.html#university-of-california-los-angeles-los-angeles-ca",
-    "href": "index.html#university-of-california-los-angeles-los-angeles-ca",
-    "title": "Richard Xu",
-    "section": "University of California, Los Angeles | Los Angeles, CA",
-    "text": "University of California, Los Angeles | Los Angeles, CA"
-  },
-  {
-    "objectID": "index.html#b.s.-in-statistics-data-science-sept-2021---june-2025",
-    "href": "index.html#b.s.-in-statistics-data-science-sept-2021---june-2025",
-    "title": "Richard Xu",
-    "section": "B.S. in Statistics & Data Science | Sept 2021 - June 2025",
-    "text": "B.S. in Statistics & Data Science | Sept 2021 - June 2025\nB.A. in Economics | Sept 2021 - June 2025"
-  },
-  {
-    "objectID": "projects.html#project-2",
-    "href": "projects.html#project-2",
-    "title": "",
-    "section": "Project 2",
-    "text": "Project 2"
-  },
-  {
-    "objectID": "projects.html#project-1",
-    "href": "projects.html#project-1",
-    "title": "",
-    "section": "",
-    "text": "Here is my project 1"
   },
   {
     "objectID": "projects/01-project.html",
@@ -77,11 +14,11 @@
     "text": "I made a model to predictively flag Trump’s post-2021 tweets based off the flagged or non-flagged statuses of his pre-2021 tweets. While the model did not have the best results, I learned a lot about how to do text-based analysis!\nTo understand the topic, here’s a video I made explaining how TF-IDF works!"
   },
   {
-    "objectID": "blogs.html",
-    "href": "blogs.html",
-    "title": "",
-    "section": "",
-    "text": "#look at notes from jose’s repo\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "objectID": "projects/01-project.html#importing-modules-reading-dataset-indexing-dataset",
+    "href": "projects/01-project.html#importing-modules-reading-dataset-indexing-dataset",
+    "title": "TF-IDF on Trump Tweets",
+    "section": "Importing Modules, Reading Dataset, Indexing Dataset",
+    "text": "Importing Modules, Reading Dataset, Indexing Dataset\n\nimport pandas as pd\nimport numpy as np\nimport string\nimport nltk\nfrom nltk.corpus import stopwords\n#nltk.download('stopwords')\npre_2021 = pd.read_csv('media1/tweets_01-08-2021.csv')\n#print(pre_2021.text)\n\n#two dataframes\nindex = pre_2021['isFlagged'] == 't'\nflagged_pre_2021 = pre_2021[index]\nn_flagged_pre_2021 = pre_2021[~index]"
   },
   {
     "objectID": "projects/01-project.html#running-tf-idf-on-the-flagged-data",
@@ -126,11 +63,39 @@
     "text": "Running it on the new post-2021 data!\n\n#time to test on post 2021\npost_2021 = pd.read_csv('media1/trump_post_2021.csv')\n#set default as false\npost_2021[\"flag_prediction\"] = \"f\"\n\n#predicting\nnew_post = tweet_flagger(post_2021)\n\n#confusion matrix\nfrequency_table = post_2021['flag_prediction'].value_counts()\nprint(frequency_table)\n\nflag_prediction\nf    17305\nt     2206\nName: count, dtype: int64\n\n\nThe function classified 2206 of the post-2021 tweets as flagged and 17305 of them as nonflagged!\nLooking at some of the tweets the function predicted as flagged we see:\nA giant Fake News Scam by CBS & 60 Minutes. Her REAL ANSWER WAS CRAZY, OR DUMB, so they actually REPLACED it with another answer in order to save her or, at least, make her look better. A FAKE NEWS SCAM, which is totally illegal. TAKE AWAY THE CBS LICENSE. Election Interference. She is a Moron, and the Fake News Media wants to hide that fact. An UNPRECEDENTED SCANDAL!!! The Dems got them to do this and should be forced to concede the Election? WOW!\nOverall, very fun interesting project! Though I did do sentiment analysis on the side, I failed to implement it so that will be something to try for next time.\nAlso once again note that I attempted logistic, xgboost, and randomforest models that had similar results to this one in terms of predictive capability. If I had more time I would work more with the data to make it more balanced before modeling."
   },
   {
-    "objectID": "projects/01-project.html#importing-modules-reading-dataset-indexing-dataset",
-    "href": "projects/01-project.html#importing-modules-reading-dataset-indexing-dataset",
-    "title": "TF-IDF on Trump Tweets",
-    "section": "Importing Modules, Reading Dataset, Indexing Dataset",
-    "text": "Importing Modules, Reading Dataset, Indexing Dataset\n\nimport pandas as pd\nimport numpy as np\nimport string\nimport nltk\nfrom nltk.corpus import stopwords\n#nltk.download('stopwords')\npre_2021 = pd.read_csv('media1/tweets_01-08-2021.csv')\n#print(pre_2021.text)\n\n#two dataframes\nindex = pre_2021['isFlagged'] == 't'\nflagged_pre_2021 = pre_2021[index]\nn_flagged_pre_2021 = pre_2021[~index]"
+    "objectID": "hobbies.html",
+    "href": "hobbies.html",
+    "title": "",
+    "section": "",
+    "text": "Tidepooling Finds Interactive Map\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "blogs.html",
+    "href": "blogs.html",
+    "title": "",
+    "section": "",
+    "text": "#look at notes from jose’s repo\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Richard Xu",
+    "section": "",
+    "text": "Richard Xu is a senior at the University of California, Los Angeles, pursuing a double major in Statistics & Data Science and Economics. Outside of academics and organizing club activities, he loves exploring the underwater world through scuba diving and capturing intricate details of nature through macro photography."
+  },
+  {
+    "objectID": "index.html#about-me",
+    "href": "index.html#about-me",
+    "title": "Richard Xu",
+    "section": "",
+    "text": "Richard Xu is a senior at the University of California, Los Angeles, pursuing a double major in Statistics & Data Science and Economics. Outside of academics and organizing club activities, he loves exploring the underwater world through scuba diving and capturing intricate details of nature through macro photography."
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Richard Xu",
+    "section": "Education",
+    "text": "Education\nUniversity of California, Los Angeles | Los Angeles, CA\n\n\n\nDegree\nDates\n\n\n\n\nB.S. in Statistics & Data Science\nSept 2021 - June 2025\n\n\nB.A. in Economics\nSept 2021 - June 2025"
   },
   {
     "objectID": "index.html#clubs",
@@ -145,20 +110,6 @@
     "title": "Richard Xu",
     "section": "Job Experience",
     "text": "Job Experience\n\nNikira Labs\nSales & Marketing Analyst Intern\nJuly 2023 - Present"
-  },
-  {
-    "objectID": "hobbies/tidepooling.html",
-    "href": "hobbies/tidepooling.html",
-    "title": "Tidepooling Finds Interactive Map",
-    "section": "",
-    "text": "library(leaflet)\n\nWarning: package 'leaflet' was built under R version 4.2.3\n\nlibrary(tigris)\n\nWarning: package 'tigris' was built under R version 4.2.3\n\n\nTo enable caching of data, set `options(tigris_use_cache = TRUE)`\nin your R script or .Rprofile.\n\nlibrary(sf)\n\nLinking to GEOS 3.9.3, GDAL 3.5.2, PROJ 8.2.1; sf_use_s2() is TRUE\n\ncalifornia &lt;- states(cb = TRUE)\n\nRetrieving data for the year 2021\n\n\n\n  |                                                                            \n  |                                                                      |   0%\n  |                                                                            \n  |=                                                                     |   1%\n  |                                                                            \n  |=                                                                     |   2%\n  |                                                                            \n  |==                                                                    |   2%\n  |                                                                            \n  |==                                                                    |   3%\n  |                                                                            \n  |===                                                                   |   4%\n  |                                                                            \n  |===                                                                   |   5%\n  |                                                                            \n  |====                                                                  |   5%\n  |                                                                            \n  |====                                                                  |   6%\n  |                                                                            \n  |=====                                                                 |   7%\n  |                                                                            \n  |=====                                                                 |   8%\n  |                                                                            \n  |======                                                                |   8%\n  |                                                                            \n  |======                                                                |   9%\n  |                                                                            \n  |=======                                                               |  10%\n  |                                                                            \n  |========                                                              |  11%\n  |                                                                            \n  |========                                                              |  12%\n  |                                                                            \n  |=========                                                             |  12%\n  |                                                                            \n  |=========                                                             |  13%\n  |                                                                            \n  |==========                                                            |  14%\n  |                                                                            \n  |==========                                                            |  15%\n  |                                                                            \n  |===========                                                           |  15%\n  |                                                                            \n  |===========                                                           |  16%\n  |                                                                            \n  |=============                                                         |  18%\n  |                                                                            \n  |==============                                                        |  21%\n  |                                                                            \n  |===============                                                       |  22%\n  |                                                                            \n  |================                                                      |  23%\n  |                                                                            \n  |=================                                                     |  24%\n  |                                                                            \n  |=================                                                     |  25%\n  |                                                                            \n  |==================                                                    |  26%\n  |                                                                            \n  |===================                                                   |  27%\n  |                                                                            \n  |====================                                                  |  28%\n  |                                                                            \n  |====================                                                  |  29%\n  |                                                                            \n  |=====================                                                 |  29%\n  |                                                                            \n  |=====================                                                 |  30%\n  |                                                                            \n  |=====================                                                 |  31%\n  |                                                                            \n  |======================                                                |  31%\n  |                                                                            \n  |=======================                                               |  33%\n  |                                                                            \n  |========================                                              |  34%\n  |                                                                            \n  |=========================                                             |  35%\n  |                                                                            \n  |=========================                                             |  36%\n  |                                                                            \n  |==========================                                            |  37%\n  |                                                                            \n  |==========================                                            |  38%\n  |                                                                            \n  |===========================                                           |  38%\n  |                                                                            \n  |===========================                                           |  39%\n  |                                                                            \n  |============================                                          |  41%\n  |                                                                            \n  |=============================                                         |  41%\n  |                                                                            \n  |=============================                                         |  42%\n  |                                                                            \n  |==============================                                        |  42%\n  |                                                                            \n  |==============================                                        |  43%\n  |                                                                            \n  |===============================                                       |  44%\n  |                                                                            \n  |================================                                      |  45%\n  |                                                                            \n  |================================                                      |  46%\n  |                                                                            \n  |=================================                                     |  48%\n  |                                                                            \n  |==================================                                    |  48%\n  |                                                                            \n  |==================================                                    |  49%\n  |                                                                            \n  |===================================                                   |  50%\n  |                                                                            \n  |====================================                                  |  51%\n  |                                                                            \n  |====================================                                  |  52%\n  |                                                                            \n  |=====================================                                 |  52%\n  |                                                                            \n  |=====================================                                 |  53%\n  |                                                                            \n  |=====================================                                 |  54%\n  |                                                                            \n  |======================================                                |  54%\n  |                                                                            \n  |======================================                                |  55%\n  |                                                                            \n  |=======================================                               |  55%\n  |                                                                            \n  |=======================================                               |  56%\n  |                                                                            \n  |========================================                              |  57%\n  |                                                                            \n  |=========================================                             |  58%\n  |                                                                            \n  |=========================================                             |  59%\n  |                                                                            \n  |==========================================                            |  59%\n  |                                                                            \n  |==========================================                            |  60%\n  |                                                                            \n  |==========================================                            |  61%\n  |                                                                            \n  |===========================================                           |  61%\n  |                                                                            \n  |===========================================                           |  62%\n  |                                                                            \n  |=============================================                         |  64%\n  |                                                                            \n  |=============================================                         |  65%\n  |                                                                            \n  |==============================================                        |  65%\n  |                                                                            \n  |===============================================                       |  67%\n  |                                                                            \n  |===============================================                       |  68%\n  |                                                                            \n  |================================================                      |  69%\n  |                                                                            \n  |=================================================                     |  70%\n  |                                                                            \n  |=================================================                     |  71%\n  |                                                                            \n  |==================================================                    |  71%\n  |                                                                            \n  |===================================================                   |  73%\n  |                                                                            \n  |====================================================                  |  75%\n  |                                                                            \n  |=====================================================                 |  76%\n  |                                                                            \n  |======================================================                |  77%\n  |                                                                            \n  |======================================================                |  78%\n  |                                                                            \n  |=======================================================               |  78%\n  |                                                                            \n  |=======================================================               |  79%\n  |                                                                            \n  |========================================================              |  80%\n  |                                                                            \n  |========================================================              |  81%\n  |                                                                            \n  |=========================================================             |  81%\n  |                                                                            \n  |=========================================================             |  82%\n  |                                                                            \n  |==========================================================            |  83%\n  |                                                                            \n  |===========================================================           |  84%\n  |                                                                            \n  |===========================================================           |  85%\n  |                                                                            \n  |=============================================================         |  87%\n  |                                                                            \n  |=============================================================         |  88%\n  |                                                                            \n  |==============================================================        |  88%\n  |                                                                            \n  |==============================================================        |  89%\n  |                                                                            \n  |===============================================================       |  89%\n  |                                                                            \n  |===============================================================       |  90%\n  |                                                                            \n  |================================================================      |  91%\n  |                                                                            \n  |================================================================      |  92%\n  |                                                                            \n  |=================================================================     |  92%\n  |                                                                            \n  |=================================================================     |  93%\n  |                                                                            \n  |==================================================================    |  94%\n  |                                                                            \n  |==================================================================    |  95%\n  |                                                                            \n  |===================================================================   |  96%\n  |                                                                            \n  |====================================================================  |  97%\n  |                                                                            \n  |====================================================================  |  98%\n  |                                                                            \n  |===================================================================== |  98%\n  |                                                                            \n  |======================================================================| 100%\n\ncalifornia_sf &lt;- california[california$STUSPS == \"CA\", ]\n\n# Create a leaflet map and add the California state geometry\nleaflet(california_sf) %&gt;%\n  addTiles() %&gt;%  # Adds default OpenStreetMap tiles\n  addPolygons(fillColor = \"lightblue\",\n              color = \"black\",\n              weight = 2,\n              opacity = 1,\n              fillOpacity = 0.5,\n              popup = ~STUSPS)  # Displays the state abbreviation as a popup\n\nWarning: sf layer has inconsistent datum (+proj=longlat +datum=NAD83 +no_defs).\nNeed '+proj=longlat +datum=WGS84'"
-  },
-  {
-    "objectID": "hobbies.html",
-    "href": "hobbies.html",
-    "title": "",
-    "section": "",
-    "text": "Tidepooling Finds Interactive Map\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "projects/02-project.html",

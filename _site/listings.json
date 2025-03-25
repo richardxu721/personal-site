@@ -7,13 +7,13 @@
     ]
   },
   {
-    "listing": "/blogs.html",
-    "items": []
-  },
-  {
     "listing": "/hobbies.html",
     "items": [
       "/hobbies/tidepooling.html"
     ]
+  },
+  {
+    "listing": "/blogs.html",
+    "items": []
   }
 ]
