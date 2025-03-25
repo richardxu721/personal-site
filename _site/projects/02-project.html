@@ -657,7 +657,14 @@ W = 0.94799, p-value = 7.044e-07</code></pre>
 <section id="predictions-using-kriging" class="level1">
 <h1>Predictions using Kriging:</h1>
 <p>We now use kriging to make predictions. Kriging is an advanced geostatistical interpolation method used to predict unknown values at specific locations based on known data points. Unlike Inverse Distance Weighting (IDW), kriging considers both distance and spatial correlation (trends and patterns in data), making it more accurate for many applications.</p>
-<p>We use different types of kriging below: - Ordinary Kriging: assumes a constant but unknown mean - Universal Kriging: assumes a non-constant and unknown mean, or trended data - Co-Kriging: uses correlated variables to help contribute to main variable predictions</p>
+<p>We use different types of kriging below:</p>
+<ul>
+<li><strong>Ordinary Kriging</strong>: Assumes a constant but unknown mean.<br>
+</li>
+<li><strong>Universal Kriging</strong>: Assumes a non-constant and unknown mean, or trended data.<br>
+</li>
+<li><strong>Co-Kriging</strong>: Uses correlated variables to help contribute to main variable predictions.</li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#we will just use ordinary, universal, and cokriging</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#ordinary kriging</span></span>

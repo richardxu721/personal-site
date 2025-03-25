@@ -325,9 +325,10 @@ The mask function is implemented to remove all areas on the raster map outside o
 We now use kriging to make predictions. Kriging is an advanced geostatistical interpolation method used to predict unknown values at specific locations based on known data points. Unlike Inverse Distance Weighting (IDW), kriging considers both distance and spatial correlation (trends and patterns in data), making it more accurate for many applications.
 
 We use different types of kriging below:
-- Ordinary Kriging: assumes a constant but unknown mean
-- Universal Kriging: assumes a non-constant and unknown mean, or trended data
-- Co-Kriging: uses correlated variables to help contribute to main variable predictions
+
+- **Ordinary Kriging**: Assumes a constant but unknown mean.  
+- **Universal Kriging**: Assumes a non-constant and unknown mean, or trended data.  
+- **Co-Kriging**: Uses correlated variables to help contribute to main variable predictions.  
 ```{r}
 #we will just use ordinary, universal, and cokriging
 #ordinary kriging
