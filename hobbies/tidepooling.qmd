@@ -1,5 +1,88 @@
 ---
 title: Tidepooling Finds Interactive Map
+# format: html
+# runtime: shiny
+# output: html_document
+# format: 
+#   dashboard:
+#     orientation: columns
+#     theme: cosmo
 ---
+
+<!-- ```{r} -->
+<!-- library(shiny) -->
+<!-- library(tidyverse) -->
+<!-- library(httr2) -->
+<!-- library(sf) -->
+<!-- library(leaflet) -->
+<!-- library(gt) -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- # Example dataset with California tidepool locations, images, and descriptions -->
+<!-- photo_data <- tibble( -->
+<!--   location = c("Fitzgerald Marine Reserve", "Crystal Cove State Park", "La Jolla Tide Pools"), -->
+<!--   lat = c(37.5028, 33.5722, 32.8493), -->
+<!--   lon = c(-122.4871, -117.8479, -117.2707), -->
+<!--   image_url = c("https://example.com/fitzgerald.jpg",  -->
+<!--                 "https://example.com/crystalcove.jpg",  -->
+<!--                 "https://example.com/lajolla.jpg"), -->
+<!--   description = c("Home to sea stars, anemones, and crabs!",  -->
+<!--                   "A great place to spot octopuses and nudibranchs!",  -->
+<!--                   "Tidepools teeming with marine life and stunning views!") -->
+<!-- ) -->
+
+<!-- ``` -->
+
+
+<!-- ```{r} -->
+<!-- # Shiny UI -->
+<!-- ui <- fluidPage( -->
+<!--   titlePanel("California Tidepooling Map"), -->
+<!--   sidebarLayout( -->
+<!--     sidebarPanel( -->
+<!--       uiOutput("photo_display"), -->
+<!--       textOutput("photo_description") -->
+<!--     ), -->
+<!--     mainPanel( -->
+<!--       leafletOutput("map") -->
+<!--     ) -->
+<!--   ) -->
+<!-- ) -->
+
+<!-- # Shiny Server -->
+<!-- server <- function(input, output, session) { -->
+<!--   # Create the interactive map -->
+<!--   output$map <- renderLeaflet({ -->
+<!--     leaflet(photo_data) |>  -->
+<!--       addTiles() |>  -->
+<!--       addCircleMarkers( -->
+<!--         lng = ~lon, lat = ~lat, -->
+<!--         color = "blue", -->
+<!--         popup = ~location, -->
+<!--         layerId = ~location -->
+<!--       ) -->
+<!--   }) -->
+
+<!--   # Update photo and description on map click -->
+<!--   observeEvent(input$map_marker_click, { -->
+<!--     clicked_location <- input$map_marker_click$id -->
+<!--     selected_photo <- photo_data |> filter(location == clicked_location) -->
+
+<!--     if (nrow(selected_photo) > 0) { -->
+<!--       output$photo_display <- renderUI({ -->
+<!--         tags$img(src = selected_photo$image_url, width = "100%") -->
+<!--       }) -->
+<!--       output$photo_description <- renderText({ -->
+<!--         selected_photo$description -->
+<!--       }) -->
+<!--     } -->
+<!--   }) -->
+<!-- } -->
+
+<!-- # Run the app -->
+<!-- shinyApp(ui, server) -->
+<!-- ``` -->
+
 
 

@@ -1,14 +1,137 @@
 ---
-toc: true
-listing:
-  - id: hobbies-listing
-    contents:
-      - "/hobbies/*.qmd"
-    sort: false
-    sort-ui: false
-    filter-ui: true
-    type: grid
-    # fields:
-    #   - title
-    categories: false
+title: Southern California Tidepool Photography
+toc: false
+format: html
+include-in-header:
+  - text: |
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" />
+      <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+#lightbox: true
 ---
+
+Everything was taken with an Olympus TG-7 with flash diffuser attachment. 
+
+::: {style="display: grid; grid-template-columns: repeat(4, 1fr); grid-gap: 1em; justify-items: center; align-items: center; max-width: 100%; height:auto"}
+
+<a href="hobbies/tidepooling_photos/P1111162.jpg" data-fancybox="gallery" data-caption="Hopkin's Rose Nudibranch at La Jolla Cove, San Diego 1/11/25">
+  <img src="hobbies/tidepooling_photos/P1111162.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/P1111177.jpg" data-fancybox="gallery" data-caption="Hopkin's Rose Nudibranch at La Jolla Cove, San Diego 1/11/25">
+  <img src="hobbies/tidepooling_photos/P1111177.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/P1111178.jpg" data-fancybox="gallery" data-caption="Hopkin's Rose Nudibranch at La Jolla Cove, San Diego 1/11/25">
+  <img src="hobbies/tidepooling_photos/P1111178.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/P1111183-2.jpg" data-fancybox="gallery" data-caption="Hopkin's Rose Nudibranch at La Jolla Cove, San Diego 1/11/25">
+  <img src="hobbies/tidepooling_photos/P1111183-2.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/P1111189.jpg" data-fancybox="gallery" data-caption="Hopkin's Rose Nudibranch at La Jolla Cove, San Diego 1/11/25">
+  <img src="hobbies/tidepooling_photos/P1111189.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/P1111190.jpg" data-fancybox="gallery" data-caption="Brooding Anemone at La Jolla Cove, San Diego 1/11/25">
+  <img src="hobbies/tidepooling_photos/P1111190.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/P1111194.jpg" data-fancybox="gallery" data-caption="Brooding Anemone at La Jolla Cove, San Diego 1/11/25">
+  <img src="hobbies/tidepooling_photos/P1111194.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC010487.jpg" data-fancybox="gallery" data-caption="Crystal Cove State Park 12/1/24">
+  <img src="hobbies/tidepooling_photos/PC010487.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC010471.jpg" data-fancybox="gallery" data-caption="Tidepool Sculpin, Crystal Cove State Park 12/1/24">
+  <img src="hobbies/tidepooling_photos/PC010471.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/crab.jpg" data-fancybox="gallery" data-caption="Purple Shore Crab, Crystal Cove State Park 12/1/24">
+  <img src="hobbies/tidepooling_photos/crab.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC010496.jpg" data-fancybox="gallery" data-caption="Red-banded Transparent Shrimp, Crystal Cove State Park 12/1/24">
+  <img src="hobbies/tidepooling_photos/PC010496.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC010521.jpg" data-fancybox="gallery" data-caption="Flabellina trilineata, Crystal Cove State Park 12/1/24">
+  <img src="hobbies/tidepooling_photos/PC010521.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC010525.jpg" data-fancybox="gallery" data-caption="Flabellina trilineata, Crystal Cove State Park 12/1/24">
+  <img src="hobbies/tidepooling_photos/PC010525.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC010531.jpg" data-fancybox="gallery" data-caption="Flabellina trilineata, Crystal Cove State Park 12/1/24">
+  <img src="hobbies/tidepooling_photos/PC010531.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC010546.jpg" data-fancybox="gallery" data-caption="Flabellina trilineata, Crystal Cove State Park 12/1/24">
+  <img src="hobbies/tidepooling_photos/PC010546.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC010547.jpg" data-fancybox="gallery" data-caption="Flabellina trilineata, Crystal Cove State Park 12/1/24">
+  <img src="hobbies/tidepooling_photos/PC010547.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC010563.jpg" data-fancybox="gallery" data-caption="Flabellina trilineata, Crystal Cove State Park 12/1/24">
+  <img src="hobbies/tidepooling_photos/PC010563.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC010565.jpg" data-fancybox="gallery" data-caption="Flabellina trilineata, Crystal Cove State Park 12/1/24">
+  <img src="hobbies/tidepooling_photos/PC010565.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC010604.jpg" data-fancybox="gallery"  data-caption="Spanish Shawl Nudibranch, Crystal Cove State Park 12/1/24">
+  <img src="hobbies/tidepooling_photos/PC010604.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC010649.jpg" data-fancybox="gallery" data-caption="Spanish Shawl Nudibranch, Crystal Cove State Park 12/1/24">
+  <img src="hobbies/tidepooling_photos/PC010649.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC130820_smaller.jpg" data-fancybox="gallery" data-caption="Whitepoint Beach 12/13/24">
+  <img src="hobbies/tidepooling_photos/PC130820_smaller.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC130732.jpg" data-fancybox="gallery" data-caption="Spanish Shawl Nudibranch, Whitepoint Beach 12/13/24">
+  <img src="hobbies/tidepooling_photos/PC130732.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC130742.jpg" data-fancybox="gallery" data-caption="Spanish Shawl Nudibranch, Whitepoint Beach 12/13/24">
+  <img src="hobbies/tidepooling_photos/PC130742.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC130780.jpg" data-fancybox="gallery" data-caption="Spanish Shawl Nudibranch, Whitepoint Beach 12/13/24">
+  <img src="hobbies/tidepooling_photos/PC130780.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC130781.jpg" data-fancybox="gallery" data-caption="Spanish Shawl Nudibranch, Whitepoint Beach 12/13/24">
+  <img src="hobbies/tidepooling_photos/PC130781.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC130803.jpg" data-fancybox="gallery" data-caption="Chestnut Cowry, Whitepoint Beach 12/13/24">
+  <img src="hobbies/tidepooling_photos/PC130803.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC130827.jpg" data-fancybox="gallery" data-caption="Purple Sea Urchin, Whitepoint Beach 12/13/24">
+  <img src="hobbies/tidepooling_photos/PC130827.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC130829.jpg" data-fancybox="gallery" data-caption="Purple Sea Urchin, Whitepoint Beach 12/13/24">
+  <img src="hobbies/tidepooling_photos/PC130829.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC140900.jpg" data-fancybox="gallery" data-caption="Between the Grass, Crystal Cove State Park 12/14/24">
+  <img src="hobbies/tidepooling_photos/PC140900.jpg" style="width:200px; height:auto;">
+</a>
+
+<a href="hobbies/tidepooling_photos/PC140948.jpg" data-fancybox="gallery" data-caption="Why Hello There!, Crystal Cove State Park 12/14/24">
+  <img src="hobbies/tidepooling_photos/PC140948.jpg" style="width:200px; height:auto;">
+</a>
+
+:::
+
